@@ -2,6 +2,7 @@
   <v-row class="content" justify="center" align="center">
     <v-col cols="12">
       <v-card class="transition pt-12 pb-12">
+        <PlanCards :prices="prices" />
       </v-card>
     </v-col>
   </v-row>
@@ -13,9 +14,11 @@ export default {
 
   data() {
     return {
+      prices: null,
     }
   },
 
+}
 </script>
 
 <style scoped>

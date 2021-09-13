@@ -87,6 +87,11 @@ export default {
           title: 'Calculadora',
           to: '/',
         },
+        {
+          icon: 'mdi-chart-bubble',
+          title: 'Sobre',
+          to: '/about',
+        },
       ],
       miniVariant: false,
       right: true,
