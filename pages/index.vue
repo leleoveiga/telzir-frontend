@@ -3,7 +3,7 @@
     <v-col cols="12">
       <v-card class="transition pt-12 pb-12">
         <PlanForm @onCalculatePrice="onCalculatePrice" />
-        <PlanCards :prices="prices" />
+        <PriceCard :prices="prices" />
       </v-card>
     </v-col>
   </v-row>
@@ -19,6 +19,12 @@ export default {
     }
   },
 
+  methods: {
+    onCalculatePrice(data) {
+      console.log('teste data', data)
+      this.prices = data
+    },
+  },
 }
 </script>
 
