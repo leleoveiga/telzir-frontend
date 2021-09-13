@@ -2,6 +2,7 @@
   <v-row class="content" justify="center" align="center">
     <v-col cols="12">
       <v-card class="transition pt-12 pb-12">
+        <PlanForm @onCalculatePrice="onCalculatePrice" />
         <PlanCards :prices="prices" />
       </v-card>
     </v-col>
