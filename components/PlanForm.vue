@@ -201,6 +201,7 @@ export default {
 }
 .dosisFont {
   font-family: 'Dosis' !important;
+  text-shadow: 0 0 4px #000;
   font-weight: 700;
 }
 </style>

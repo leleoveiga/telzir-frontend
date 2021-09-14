@@ -5,7 +5,7 @@
         v-if="prices"
         elevation="20"
         class="mx-10 pa-8 d-flex flex-column align-center justify-center"
-        color="success"
+        color="#50df40"
       >
         <span class="dosisFont text-h4 mb-4">Com plano :D </span>
         <span class="dosisFont text-h3 mb-4"
@@ -17,7 +17,7 @@
       <v-card
         v-if="prices"
         class="mx-10 pa-8 d-flex flex-column align-center justify-center"
-        color="secondary"
+        color="#ff4242"
       >
         <span class="dosisFont text-h5 mb-4">Sem plano :(</span>
         <span class="dosisFont text-h4 mb-4"
@@ -58,6 +58,7 @@ export default {
 <style scoped>
 .dosisFont {
   font-family: 'Poppins' !important;
+  text-shadow: 0 0 5px #000;
   font-weight: 700;
 }
 </style>
