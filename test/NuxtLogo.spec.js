@@ -1,9 +1,11 @@
-import { mount } from '@vue/test-utils'
-import NuxtLogo from '@/components/NuxtLogo.vue'
+import { get, setupTest } from '@nuxt/test-utils'
 
-describe('NuxtLogo', () => {
-  test('is a Vue instance', () => {
-    const wrapper = mount(NuxtLogo)
-    expect(wrapper.vm).toBeTruthy()
+describe('ssr', () => {
+  setupTest({ server: true })
+
+  it('renders the index page', async () => {
+    const { body } = await get('/about')
+
+    expect(body).toContain('<h1>Sobre</h1>')
   })
 })

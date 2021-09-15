@@ -21,7 +21,6 @@ export default {
 
   methods: {
     onCalculatePrice(data) {
-      console.log('teste data', data)
       this.prices = data
     },
   },

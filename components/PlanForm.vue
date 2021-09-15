@@ -1,7 +1,7 @@
 <template>
   <v-form v-if="origins" ref="form" v-model="validForm">
     <v-row class="mx-12 d-flex align-center justify-center">
-      <v-col cols="12" sm="3">
+      <v-col cols="12" lg="2" sm="3">
         <v-select
           v-model="originSelected"
           hint="Origem da chamada"
@@ -11,9 +11,11 @@
           return-object
           single-line
           required
+          outlined
+          dense
         ></v-select>
       </v-col>
-      <v-col cols="12" sm="3">
+      <v-col cols="12" lg="2" sm="3">
         <v-select
           v-model="destinySelected"
           hint="Destino da chamada"
@@ -23,9 +25,11 @@
           return-object
           single-line
           required
+          outlined
+          dense
         ></v-select>
       </v-col>
-      <v-col cols="12" sm="3">
+      <v-col cols="12" lg="2" sm="3">
         <v-text-field
           v-model="time"
           hint="Duração da chamada"
@@ -35,6 +39,8 @@
               'Digite a duração da chamada!',
           ]"
           persistent-hint
+          outlined
+          dense
         ></v-text-field>
       </v-col>
     </v-row>
@@ -50,7 +56,7 @@
               :color="active ? 'primary' : '' + 'accent'"
               class="mx-4 mt-6 d-flex align-center flex-column justify-center"
               style="position: relative"
-              :elevation="active ? 24 : 0"
+              :elevation="active ? 18 : 0"
               height="200"
               min-width="300"
               @click="toggleAndSelect(plan, toggle, active)"
@@ -84,8 +90,9 @@
         </v-scroll-y-transition>
       </div>
       <v-btn
-        large
-        class="pa-8 dosisFont text-h4 primary mt-10 align-self-center"
+        x-large
+        class="dosisFont text-h5 primary mt-10 align-self-center"
+        :loading="loadingCalc"
         @click="calculatePrice"
       >
         CALCULAR CUSTOS!
@@ -110,6 +117,7 @@ export default {
       destinySelected: '',
       planSelected: '',
 
+      loadingCalc: false,
       validForm: false,
       planRule: false,
     }
@@ -156,8 +164,8 @@ export default {
     toggleAndSelect(plan, toggle, active) {
       toggle()
       console.log(active, 'ativo?')
-      console.log(plan)
-      if (!active) this.planSelected = plan.planCode
+      console.log(plan.code)
+      if (!active) this.planSelected = plan.code
       else this.planSelected = ''
     },
     calculatePrice() {
@@ -167,6 +175,7 @@ export default {
         const destiny = this.destinySelected
         const time = this.time
         const planCode = this.planSelected
+        this.loadingCalc = true
         this.$axios
           .$get('plans/prices', {
             params: {
@@ -179,6 +188,7 @@ export default {
           .then((res) => {
             console.log('🚀 ~ file: PlanForm.vue ~ line 212~ .then ~ res', res)
             this.$emit('onCalculatePrice', res)
+            this.loadingCalc = false
           })
       } else {
         console.log('acho q n ta valido')
@@ -201,7 +211,6 @@ export default {
 }
 .dosisFont {
   font-family: 'Dosis' !important;
-  text-shadow: 0 0 4px #000;
   font-weight: 700;
 }
 </style>
