@@ -124,29 +124,33 @@ export default {
   },
   computed: {},
   watch: {
-    originSelected(newValue, oldValue) {
+    originSelected() {
       this.getValidDestinies()
     },
   },
   mounted() {
-    this.$axios.$get('ddds/list').then((res) => {
-      this.originSelected = res[0]
-      this.origins = res
-    })
-    this.$axios.$get('plans/list').then((res) => {
-      this.plans = res
-    })
+    this.$axios
+      .$get('ddds/list')
+      .then((res) => {
+        this.originSelected = res[0]
+        this.origins = res
+      })
+      .catch((error) => {
+        this.$emit('onRequestError', error)
+      })
+    this.$axios
+      .$get('plans/list')
+      .then((res) => {
+        this.plans = res
+      })
+      .catch((error) => {
+        this.$emit('onRequestError', error)
+      })
   },
 
   methods: {
     validatePlan() {
-      console.log('validate plan')
-      console.log(this.originSelected)
-      console.log(this.destinySelected)
-      console.log(this.planSelected)
-      //   this.$refs.form.validate()
       if (!this.planSelected) {
-        console.log(this.planRule, 'plan rule')
         this.planRule = true
         setTimeout(() => (this.planRule = false), 3000)
 
@@ -155,22 +159,16 @@ export default {
         return true
       }
     },
-    reset() {
-      this.$refs.form.reset()
-    },
     resetValidation() {
       this.$refs.form.resetValidation()
     },
     toggleAndSelect(plan, toggle, active) {
       toggle()
-      console.log(active, 'ativo?')
-      console.log(plan.code)
       if (!active) this.planSelected = plan.code
       else this.planSelected = ''
     },
     calculatePrice() {
       if (this.$refs.form.validate() && this.validatePlan()) {
-        console.log('achoq  ta valido')
         const origin = this.originSelected
         const destiny = this.destinySelected
         const time = this.time
@@ -186,19 +184,24 @@ export default {
             },
           })
           .then((res) => {
-            console.log('🚀 ~ file: PlanForm.vue ~ line 212~ .then ~ res', res)
             this.$emit('onCalculatePrice', res)
             this.loadingCalc = false
           })
-      } else {
-        console.log('acho q n ta valido')
+          .catch((error) => {
+            this.$emit('onRequestError', error)
+            this.loadingCalc = false
+          })
       }
     },
     getValidDestinies() {
-      this.$axios.$get(`ddds/destinies/${this.originSelected}`).then((res) => {
-        console.log('🚀 ~ file: PlanForm.vue ~ line 193~ .then ~ res', res)
-        this.destinies = res
-      })
+      this.$axios
+        .$get(`ddds/destinies/${this.originSelected}`)
+        .then((res) => {
+          this.destinies = res
+        })
+        .catch((error) => {
+          this.$emit('onRequestError', error)
+        })
     },
   },
 }
