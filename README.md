@@ -4,13 +4,17 @@
 
 ## Instruções
 
+- Ter o NodeJS (v14.17.5) e NPM instalado em sua máquina
 - Clonar o repositório
-- Ter NPM instalado em sua máquina
+- Instalar dependências com o comando:
 
 ```bash
-# instalar dependências
-$ npm install
+npm i
+```
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+## Rodar o projeto
+
+```bash
+# endereço padrão: localhost:3000
+npm run dev
 ```
