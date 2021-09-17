@@ -18,3 +18,7 @@ npm i
 # endereço padrão: localhost:3000
 npm run dev
 ```
+
+## Comentários
+
+Projeto foi feito utilizando Nuxt.js (Vue) e Vuetify.js.
