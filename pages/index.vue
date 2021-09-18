@@ -2,7 +2,6 @@
   <v-row class="content" justify="center" align="center">
     <v-col cols="12">
       <v-card class="transition pt-12 pb-12">
-        <!-- TODO error message -->
         <v-snackbar v-model="snackbar" app color="error" timeout="3000" top>
           <b>{{ snackbarMessage }}</b>
         </v-snackbar>
