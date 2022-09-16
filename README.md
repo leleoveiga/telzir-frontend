@@ -1,4 +1,5 @@
 # telzir-frontend-nuxt
+repo backend: https://github.com/leleoveiga/telzir-backend
 
 ## Instruções
 
